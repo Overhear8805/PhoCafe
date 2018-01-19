@@ -1,14 +1,16 @@
-package se.tuxflux.phocafe
+package se.tuxflux.phocafe.utility
 
+import android.app.Activity
 import android.content.Context
 import android.support.annotation.LayoutRes
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import com.squareup.picasso.Picasso
 import java.util.concurrent.TimeUnit
+
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
@@ -42,6 +44,24 @@ fun View.visible() {
 
 fun View.invisible() {
     this.visibility = View.INVISIBLE
+}
+
+fun Context.screenWidthPx(): Int {
+    val displayMetrics = DisplayMetrics()
+    (this as Activity).windowManager
+            .defaultDisplay
+            .getMetrics(displayMetrics);
+
+    return displayMetrics.widthPixels
+}
+
+fun Context.screenHeightPx(): Int {
+    val displayMetrics = DisplayMetrics()
+    (this as Activity).windowManager
+            .defaultDisplay
+            .getMetrics(displayMetrics);
+
+    return displayMetrics.heightPixels
 }
 
 fun Context.toast(message: CharSequence) =
